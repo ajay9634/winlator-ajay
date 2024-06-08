@@ -2,13 +2,16 @@
 	<img src="logo.png" width="376" height="128" alt="Winlator Logo" />  
 </p>
 
-# Winlator
+# Winlator mod Ajay
 
 Winlator is an Android application that lets you to run Windows (x86_64) applications with Wine and Box86/Box64.
 
+# About this mod
+added some useful files and environment 
+
 # Installation
 
-1. Download and install the APK (Winlator_6.1.apk) from [GitHub Releases](https://github.com/brunodev85/winlator/releases)
+1. Download and install the APK (Winlator_6.1.apk) from [GitHub Releases](https://github.com/ajay9634/winlator/releases)
 2. Launch the app and wait for the installation process to finish
 
 ----
@@ -36,6 +39,8 @@ Winlator is an Android application that lets you to run Windows (x86_64) applica
 - DXVK ([github.com/doitsujin/dxvk](https://github.com/doitsujin/dxvk))
 - D8VK ([github.com/AlpyneDreams/d8vk](https://github.com/AlpyneDreams/d8vk))
 - CNC DDraw ([github.com/FunkyFr3sh/cnc-ddraw](https://github.com/FunkyFr3sh/cnc-ddraw))
+
+Many thanks to brunodev85, without official app ,there wouldn't be any mod.
 
 Many thanks to [ptitSeb](https://github.com/ptitSeb) (Box86/Box64), [Danylo](https://blogs.igalia.com/dpiliaiev/tags/mesa/) (Turnip), [alexvorxx](https://github.com/alexvorxx) (Mods/Tips) and others.
 Thank you to all the people who believe in this project.
