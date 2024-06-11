@@ -11,7 +11,7 @@ added some useful files and environment
 
 # Installation
 
-1. Download and install the APK (Winlator_6.1.apk) from [GitHub Releases](https://github.com/ajay9634/winlator/releases)
+1. Download and install the APK from [GitHub Releases](https://github.com/ajay9634/winlator/releases)
 2. Launch the app and wait for the installation process to finish
 
 ----
