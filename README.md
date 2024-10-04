@@ -9,6 +9,12 @@ Winlator is an Android application that lets you to run Windows (x86_64) applica
 # About this mod
 added some useful files and environment 
 
+# current status
+
+work has been shifted to Ajay prefix.
+checkout here
+
+
 # Installation
 
 1. Download and install the APK from [GitHub Releases](https://github.com/ajay9634/winlator/releases)
