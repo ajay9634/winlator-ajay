@@ -45,7 +45,6 @@ public class GLRenderer implements GLSurfaceView.Renderer, WindowManager.OnWindo
     private boolean toggleFullscreen = false;
     private boolean viewportNeedsUpdate = true;
     private boolean cursorVisible = true;
-    private boolean rootWindowDownsized = false;
     private boolean screenOffsetYRelativeToCursor = false;
     private String[] unviewableWMClasses = null;
     private float magnifierZoom = 1.0f;
@@ -164,7 +163,7 @@ public class GLRenderer implements GLSurfaceView.Renderer, WindowManager.OnWindo
         }
 
         renderWindows(xrImmersive);
-        if (cursorVisible && !rootWindowDownsized) renderCursor();
+        if (cursorVisible) renderCursor();
 
         if (!magnifierEnabled && !fullscreen) GLES20.glDisable(GLES20.GL_SCISSOR_TEST);
 
@@ -250,15 +249,6 @@ public class GLRenderer implements GLSurfaceView.Renderer, WindowManager.OnWindo
         quadVertices.bind(windowMaterial.programId);
 
         try (XLock lock = xServer.lock(XServer.Lockable.DRAWABLE_MANAGER)) {
-            rootWindowDownsized = false;
-            if (!renderableWindows.isEmpty()) {
-                RenderableWindow root = renderableWindows.get(0);
-                if ((root.content.width < xServer.screenInfo.width) || (root.content.height < xServer.screenInfo.height)) {
-                    forceFullscreen = true;
-                    rootWindowDownsized = true;
-                }
-            }
-
             if (forceFullscreen && !renderableWindows.isEmpty()) {
                 RenderableWindow window = renderableWindows.get(renderableWindows.size() - 1);
                 renderDrawable(window.content, window.rootX, window.rootY, windowMaterial, true);
