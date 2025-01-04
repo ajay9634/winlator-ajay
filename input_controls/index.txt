@@ -1,4 +1,15 @@
 Ajay common.icp
+18WheelsOfSteel.icp
+Crysis1.icp
+CS2D Button.icp
+dead_space.icp
+GTA_SA.icp
+gzdoom.icp
+gzdoom V2.icp
+Re7.icp
+Tekken.icp
+Touhou Fumo Racing.icp
+-------------------------
 Alien Versus Predator.icp
 Alpha Protocol.icp
 Bioshock.icp
