@@ -1,4 +1,4 @@
-dxvk-1.10(stripped).tzst
+dxvk-1.10.tzst
 dxvk-1.7.3(stripped).tzst
 dxvk-1.4.2.tzst
 dxvk-2.2.116.tzst
@@ -7,4 +7,4 @@ dxvk-2.4.1.tzst
 dxvk-2.4.1.1(gplasync).tzst
 dxvk-2.4.1.293.tzst
 dxvk-2.5.2.tzst
-dxvk-2.5.2.1(gplasync).tzst
+dxvk-2.5.2.1.gplasync.tzst
