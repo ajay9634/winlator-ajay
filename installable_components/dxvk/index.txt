@@ -1,13 +1,14 @@
--stripped-
+-stripped-👇
 dxvk-1.10.tzst
 dxvk-1.7.3.tzst
--original-
+-original-👇
 dxvk-1.4.2.tzst
 dxvk-2.2.116.tzst
 dxvk-2.3.1.tzst
 dxvk-2.4.1.tzst
 dxvk-2.4.1.293.tzst
 dxvk-2.5.2.tzst
--gplasync-
+-gplasync-👇
 dxvk-2.4.1.1.tzst
 dxvk-2.5.2.1.tzst
+
