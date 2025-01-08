@@ -1,6 +1,8 @@
 -stripped-👇
 dxvk-1.10.tzst
 dxvk-1.7.3.tzst
+-sarek-👇
+dxvk-1.10.6.tzst
 -original-👇
 dxvk-1.4.2.tzst
 dxvk-2.2.116.tzst
