@@ -8,6 +8,10 @@
   { "type": "Turnip", "verName": "23.3.0", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/turnip-23.3.0.wcp" },
   { "type": "Turnip", "verName": "24.3.0-d264c66f", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/turnip-24.3.0-d264c66f.wcp" },
   { "type": "Turnip", "verName": "25.0.0", "verCode": 5, "remoteUrl": "https://github.com/K11MCH1/WinlatorTurnipDrivers/releases/download/winlator_v25.0_r5/turnip-v25.0.0-R5.wcp" },
-  { "type": "Wine", "verName": "9.2-custom", "verCode": 2, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.3/wine-9.2-custom.wcp" },
-  { "type": "Wine", "verName": "9.15-custom", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.3/wine-9.15-custom.wcp" }
+  { "type": "Wine", "verName": "9.2-custom", "verCode": 2, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.2-custom.old.wcp" },
+  { "type": "Wine", "verName": "9.13-custom", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.13-custom.wcp" },
+  { "type": "Wine", "verName": "9.15-custom", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.15-custom.wcp" },
+  { "type": "Wine", "verName": "9.16-custom", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.16-custom.wcp" },
+  { "type": "Wine", "verName": "9.20-custom", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.20.by.sandstranger.wcp" },
+  { "type": "Wine", "verName": "9.21-custom", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.21.by.sandstranger.wcp" },
 ]
