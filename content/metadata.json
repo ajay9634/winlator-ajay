@@ -2,7 +2,7 @@
   { "type": "Box64", "verName": "0.2.7", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.3/box64-0.2.7.wcp" },
   { "type": "Box64", "verName": "0.3.1-017d13a", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/box64-0.3.1-017d13a.wcp" },
   { "type": "Box64", "verName": "0.3.1-0450371", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.3/box64-0.3.1-0450371.wcp" },
-  { "type": "Box64", "verName": "0.3.1-0450371-8g2", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.3/box64-0.3.1-0450371-8g2.wcp" },
+  { "type": "Box64", "verName": "0.3.1-8g2", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.3/box64-0.3.1-0450371-8g2.wcp" },
   { "type": "DXVK", "verName": "0.96", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/dxvk-0.96.wcp" },
   { "type": "DXVK", "verName": "1.10.3", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/dxvk-1.10.3.wcp" },
   { "type": "Turnip", "verName": "23.3.0", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/turnip-23.3.0.wcp" },
