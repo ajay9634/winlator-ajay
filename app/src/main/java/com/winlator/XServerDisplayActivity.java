@@ -585,8 +585,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             public void onMapWindow(Window window) {
                 // Log the class name of the mapped window
                 Log.d("XServerDisplayActivity", "onMapWindow: Detected window className: " + window.getClassName());
-                
-                changeFrameRatingVisibility(window); 
 
                 // Apply task affinity and other workarounds
                 if (win32AppWorkarounds != null) {
@@ -600,10 +598,15 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 }
             }
 
+            @Override
+            public void onWindowPropertyChanged(Window window, Property property) {
+                changeFrameRatingVisibility(window, property);
+            }    
+
 
             @Override
             public void onUnmapWindow(Window window) {
-                changeFrameRatingVisibility(window);
+                changeFrameRatingVisibility(window, null);
             }
         });
 
@@ -1929,7 +1932,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         if (container != null && container.isShowFPS()) {
             frameRating = new FrameRating(this);
             envVars.put("ENABLE_UTIL_LAYER", "1");
-            envVars.put("LD_PRELOAD", imageFs.getLibDir().getPath() + "/libutil.so");
             frameRating.setVisibility(View.GONE);
             rootView.addView(frameRating);
         }
@@ -3031,44 +3033,21 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 //        }
 //    }
     
-    private boolean isEligibleForFrameRating(Window window) {
-        int pid = window.getProcessId();
-        boolean found = false;
-        
-        File procMap = new File("/proc/" + pid + "/maps");
-        if (procMap.exists()) {
-            try {
-                String mapsContent = new String(Files.readAllBytes(procMap.toPath()));
-                if (mapsContent != null) {
-                    if (mapsContent.contains("opengl32") || mapsContent.contains("winevulkan")) {
-                        found = true;
-                    }
-                }
-            }
-            catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return found;
-    }
-
-    private void changeFrameRatingVisibility(Window window) {
+    private void changeFrameRatingVisibility(Window window, Property property) {
         if (frameRating == null) return;
         
-        if (window != null && !window.getName().isEmpty()) {
-            if (frameRatingWindowId == -1 && isEligibleForFrameRating(window)) {
+        if (property != null) {
+            if (frameRatingWindowId == -1 && property.nameAsString().contains("_UTIL_LAYER")) {
                 frameRatingWindowId = window.id;
                 Log.d("XServerDisplayActivity", "Showing hud for Window " + window.getName());
                 runOnUiThread(() -> frameRating.setVisibility(View.VISIBLE));
             }    
-            else if (frameRatingWindowId == window.id) {
-                frameRatingWindowId = -1;
-                Log.d("XServerDisplayActivity", "Disabling hud for Window " + window.getName());
-                frameRating.reset();
-                runOnUiThread(() -> frameRating.setVisibility(View.GONE));
-            }
         }
-        
+        else if (frameRatingWindowId != -1 && frameRating.getVisibility() == View.VISIBLE) {
+            frameRatingWindowId = -1;
+            Log.d("XServerDisplayActivity", "Hiding hud for Window " + window.getName());
+            runOnUiThread(() -> frameRating.setVisibility(View.GONE));
+        }    
     }
 
     private void scheduleSecondaryExecution(String secondaryExec, int delaySeconds) {
