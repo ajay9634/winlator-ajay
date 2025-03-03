@@ -599,10 +599,9 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             }
 
             @Override
-            public void onWindowPropertyChanged(Window window, Property property) {
+            public void onModifyWindowProperty(Window window, Property property) {
                 changeFrameRatingVisibility(window, property);
             }    
-
 
             @Override
             public void onUnmapWindow(Window window) {
