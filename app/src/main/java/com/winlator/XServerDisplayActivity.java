@@ -101,6 +101,7 @@ import com.winlator.renderer.effects.NTSCCombinedEffect;
 import com.winlator.renderer.effects.ToonEffect;
 import com.winlator.widget.FrameRating;
 import com.winlator.widget.InputControlsView;
+import com.winlator.widget.LogView;
 import com.winlator.widget.MagnifierView;
 import com.winlator.widget.TouchpadView;
 import com.winlator.widget.WinetricksFloatingView;
@@ -377,6 +378,13 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         ProcessHelper.removeAllDebugCallbacks();
         boolean enableLogs = preferences.getBoolean("enable_wine_debug", false) || preferences.getBoolean("enable_box86_64_logs", false);
         if (enableLogs) ProcessHelper.addDebugCallback(debugDialog = new DebugDialog(this));
+        boolean enableApiDump = preferences.getBoolean("enable_vulkan_api_dump", false);
+        if (enableApiDump) {
+            ProcessHelper.removeAllDebugCallbacks();
+            File logFile = LogView.getLogFile();
+            envVars.put("VK_INSTANCE_LAYERS", "VK_LAYER_LUNARG_api_dump");
+            envVars.put("VK_API_DUMP_LOG_FILENAME", logFile.getPath());
+        }
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.main_menu_logs).setVisible(enableLogs);
         if (XrActivity.isEnabled(this)) menu.findItem(R.id.main_menu_magnifier).setVisible(false);
