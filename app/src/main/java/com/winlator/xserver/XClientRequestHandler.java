@@ -232,6 +232,12 @@ public class XClientRequestHandler implements RequestHandler {
                 case ClientOpcodes.INTERN_ATOM:
                     AtomRequests.internAtom(client, inputStream, outputStream);
                     break;
+                /* This seems to also link to UnmapWindow */
+                case ClientOpcodes.GET_ATOM_NAME:
+                    try (XLock lock = client.xServer.lock(XServer.Lockable.WINDOW_MANAGER, XServer.Lockable.INPUT_DEVICE)) {
+                        AtomRequests.getAtomName(client, inputStream, outputStream);
+                    }
+                    break;
                 case ClientOpcodes.CHANGE_PROPERTY:
                     try (XLock lock = client.xServer.lock(XServer.Lockable.WINDOW_MANAGER)) {
                         WindowRequests.changeProperty(client, inputStream, outputStream);

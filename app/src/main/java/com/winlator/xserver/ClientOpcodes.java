@@ -14,6 +14,7 @@ public abstract class ClientOpcodes {
     public static final byte GET_GEOMETRY = 14;
     public static final byte QUERY_TREE = 15;
     public static final byte INTERN_ATOM = 16;
+    public static final byte GET_ATOM_NAME = 17;
     public static final byte CHANGE_PROPERTY = 18;
     public static final byte DELETE_PROPERTY = 19;
     public static final byte GET_PROPERTY = 20;
