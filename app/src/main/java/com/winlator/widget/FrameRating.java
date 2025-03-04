@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.winlator.R;
 
 import com.winlator.core.FileUtils;
+import com.winlator.core.GPUInformation;
 import com.winlator.core.StringUtils;
 import java.io.File;
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class FrameRating extends FrameLayout implements Runnable {
     }
     
     private String getRenderer() {
-        String renderer = "";
+        String renderer = "Unknown";
         ArrayList<String> lines = FileUtils.readLines(appInfo);
         if (lines.size() > 0)
             renderer = lines.get(0);
@@ -70,7 +71,7 @@ public class FrameRating extends FrameLayout implements Runnable {
     }
     
     private String getGPUName() {
-        String gpuName = "";
+        String gpuName = GPUInformation.getRenderer(context);
         ArrayList<String> lines = FileUtils.readLines(appInfo);
         if (lines.size() > 1) {
             gpuName = lines.get(1);
@@ -129,17 +130,15 @@ public class FrameRating extends FrameLayout implements Runnable {
     }
     
     public void reset() {
-        Log.d("FrameRating", "Resetting renderer and FPS");
-        appInfo.delete();
+        Log.d("FrameRating", "Resetting FrameRating");
         renderer = null;
+        gpuName = null;
         lastFPS = 0;
+        appInfo.delete();
     }
 
     public void update() {
         if (lastTime == 0) lastTime = SystemClock.elapsedRealtime();
-        if (appInfo.exists() && renderer == null) renderer = getRenderer();
-        if (appInfo.exists() && gpuName == null) gpuName = getGPUName();
-            
         long time = SystemClock.elapsedRealtime();
         if (time >= lastTime + 500) {
             lastFPS = ((float)(frameCount * 1000) / (time - lastTime));
@@ -147,7 +146,6 @@ public class FrameRating extends FrameLayout implements Runnable {
             lastTime = time;
             frameCount = 0;
         }
-
         frameCount++;
     }
 
@@ -155,8 +153,14 @@ public class FrameRating extends FrameLayout implements Runnable {
     public void run() {
         if (getVisibility() == GONE) setVisibility(View.VISIBLE);
         tvFPS.setText(String.format(Locale.ENGLISH, "%.1f", lastFPS));
-        if (!tvRenderer.getText().toString().equals(renderer)) tvRenderer.setText(renderer);
-        if (!tvGPU.getText().toString().equals(gpuName)) tvGPU.setText(gpuName);
+        if (appInfo.exists() && renderer == null) {
+            renderer = getRenderer();
+            tvRenderer.setText(renderer);
+        }
+        if (appInfo.exists() && gpuName == null) {
+            gpuName = getGPUName();
+            tvGPU.setText(gpuName);
+        }
         tvRAM.setText(getAvailableRAM() + " GB Used / " + totalRAM + " Total");
     }
 }

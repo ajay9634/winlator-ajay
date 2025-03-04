@@ -3045,6 +3045,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         else if (frameRatingWindowId != -1 && frameRating.getVisibility() == View.VISIBLE) {
             frameRatingWindowId = -1;
             Log.d("XServerDisplayActivity", "Hiding hud for Window " + window.getName());
+            frameRating.reset();
             runOnUiThread(() -> frameRating.setVisibility(View.GONE));
         }    
     }
