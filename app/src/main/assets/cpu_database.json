@@ -766,5 +766,9 @@
   "a12":{
     "CPU":"4x Cortex-A53 @ 2.35GHz 4x Cortex-A53 @ 1.8GHz",
     "SoC":"MediaTek Helio P35 (MT6765)"
+  },
+  "generic":{
+    "CPU":"Unknown",
+    "SoC":"Generic Android AARCH64 CPU"
   }
 }
