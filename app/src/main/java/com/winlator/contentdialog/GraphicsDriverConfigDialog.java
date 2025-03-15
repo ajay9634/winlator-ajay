@@ -16,6 +16,7 @@ import com.winlator.contents.AdrenotoolsManager;
 import com.winlator.contents.ContentProfile;
 import com.winlator.contents.ContentsManager;
 import com.winlator.core.AppUtils;
+import com.winlator.core.GPUInformation;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -150,6 +151,8 @@ public class GraphicsDriverConfigDialog extends ContentDialog {
         turnipVersions.addAll(Arrays.asList(turnipDefaultVersions));
         wrapperVersions.addAll(Arrays.asList(wrapperDefaultVersions));
 
+        if (GPUInformation.isAdreno6xx(context))
+            wrapperVersions.remove("v805");
 
         // Add installed versions from ContentsManager
         List<ContentProfile> profiles = contentsManager.getProfiles(ContentProfile.ContentType.CONTENT_TYPE_TURNIP);
