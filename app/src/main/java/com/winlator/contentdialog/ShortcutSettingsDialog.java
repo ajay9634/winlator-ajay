@@ -314,15 +314,19 @@ public class ShortcutSettingsDialog extends ContentDialog {
         
         // Handle bionic and glibc switching logic
         if (!shortcut.container.isBionic()) {
-           List<String> sGraphicsItemsList = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.graphics_driver_entries)));
-           sGraphicsItemsList.remove("Wrapper");
-           sGraphicsDriver.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sGraphicsItemsList));
-           fexcoreFL.setVisibility(View.GONE);
+            String selectedDriver = sGraphicsDriver.getSelectedItem().toString();
+            List<String> sGraphicsItemsList = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.graphics_driver_entries)));
+            sGraphicsItemsList.remove("Wrapper");
+            sGraphicsDriver.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sGraphicsItemsList));
+            AppUtils.setSpinnerSelectionFromValue(sGraphicsDriver, selectedDriver);
+            fexcoreFL.setVisibility(View.GONE);
         }
         else {
+            String selectedDriver = sGraphicsDriver.getSelectedItem().toString();
             List<String> sGraphicsItemsList = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.graphics_driver_entries)));
             sGraphicsItemsList.remove("VirGL");
             sGraphicsDriver.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sGraphicsItemsList));
+            AppUtils.setSpinnerSelectionFromValue(sGraphicsDriver, selectedDriver);
             boxFL.setVisibility(View.GONE);
         }
 
