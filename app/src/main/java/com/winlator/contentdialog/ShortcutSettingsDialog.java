@@ -320,6 +320,9 @@ public class ShortcutSettingsDialog extends ContentDialog {
            fexcoreFL.setVisibility(View.GONE);
         }
         else {
+            List<String> sGraphicsItemsList = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.graphics_driver_entries)));
+            sGraphicsItemsList.remove("VirGL");
+            sGraphicsDriver.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sGraphicsItemsList));
             boxFL.setVisibility(View.GONE);
         }
 
