@@ -557,7 +557,7 @@ public class ShortcutSettingsDialog extends ContentDialog {
             graphicsDriverVersion = shortcut.getExtra("turnipGraphicsDriverVersion", shortcut.container.getTurnipGraphicsDriverVersion());
         else
             graphicsDriverVersion = shortcut.getExtra("wrapperGraphicsDriverVersion", shortcut.container.getWrapperGraphicsDriverVersion());
-        new GraphicsDriverConfigDialog(anchor, graphicsDriverVersion, graphicsDriver, shortcut.container.getManager(), (version) -> {
+        new GraphicsDriverConfigDialog(anchor, graphicsDriverVersion, graphicsDriver, shortcut.container.isBionic(), (version) -> {
             // Update the shortcut's graphics driver version with the selected version from the dialog.
             if (graphicsDriver.contains("turnip"))     
                 shortcut.putExtra("turnipGraphicsDriverVersion", version);
