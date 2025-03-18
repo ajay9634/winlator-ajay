@@ -2964,8 +2964,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
                 args += "/dir " + StringUtils.escapeDOSPath(exeDir) + " \"" + filename + "\"" + execArgs;
             }
-        } else {
-            args += "\"wfm.exe\"";
         }
 
         // Append EXTRA_EXEC_ARGS from overrideEnvVars if it exists
