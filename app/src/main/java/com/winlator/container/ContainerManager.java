@@ -210,7 +210,8 @@ public class ContainerManager {
             File desktopDir = container.getDesktopDir();
             File steamUserDesktopDir = container.getSteamUserDesktopDir();
             ArrayList<File> files = new ArrayList<>();
-            files.addAll(Arrays.asList(desktopDir.listFiles()));
+            if (desktopDir.exists())
+                files.addAll(Arrays.asList(desktopDir.listFiles()));
             if (steamUserDesktopDir.exists())
                 files.addAll(Arrays.asList(steamUserDesktopDir.listFiles()));
             if (files != null) {
