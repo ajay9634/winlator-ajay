@@ -182,7 +182,6 @@ public class AdrenotoolsManager {
     }
     
     public void setDriverById(EnvVars envVars, ImageFs imagefs, String adrenotoolsDriverId) {
-        extractDriverFromResources(adrenotoolsDriverId);
         if (extractDriverFromResources(adrenotoolsDriverId) || enumarateInstalledDrivers().contains(adrenotoolsDriverId)) {
             String driverPath = adrenotoolsContentDir.getAbsolutePath() + "/" + adrenotoolsDriverId + "/";
             envVars.put("ADRENOTOOLS_DRIVER_PATH", driverPath);
