@@ -1937,7 +1937,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
 
         if (container != null && container.isShowFPS()) {
-            frameRating = new FrameRating(this);
+            frameRating = new FrameRating(this, container);
             envVars.put("ENABLE_UTIL_LAYER", "1");
             frameRating.setVisibility(View.GONE);
             rootView.addView(frameRating);
