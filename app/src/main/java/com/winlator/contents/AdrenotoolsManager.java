@@ -11,6 +11,7 @@ import com.winlator.container.Shortcut;
 import com.winlator.container.ContainerManager;
 import com.winlator.core.EnvVars;
 import com.winlator.core.FileUtils;
+import com.winlator.core.GPUInformation;
 import com.winlator.core.TarCompressorUtils;
 import com.winlator.xenvironment.ImageFs;
 import java.io.File;
@@ -187,6 +188,14 @@ public class AdrenotoolsManager {
             envVars.put("ADRENOTOOLS_DRIVER_PATH", driverPath);
             envVars.put("ADRENOTOOLS_HOOKS_PATH", imagefs.getLibDir());
             envVars.put("ADRENOTOOLS_DRIVER_NAME", getLibraryName(adrenotoolsDriverId));
-        }    
+            if (adrenotoolsDriverId.contains("v762") && GPUInformation.getDriverVersion().contains("512.530")) {
+                Log.d("AdrenotoolsManager", "Patching v762 driver for stock v530");
+                FileUtils.writeToBinaryFile(driverPath + "notadreno_utils.so", 0x2680, 3);
+            }
+            else if (adrenotoolsDriverId.contains("v762") && GPUInformation.getDriverVersion().contains("512.502")) {
+                Log.d("AdrenotoolsManager", "Patching v762 driver for stock v502");
+                FileUtils.writeToBinaryFile(driverPath + "notadreno_utils.so", 0x2680, 2);
+            }
+        }
     }
  }
