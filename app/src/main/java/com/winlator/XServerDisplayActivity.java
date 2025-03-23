@@ -3026,7 +3026,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
     private void applyGeneralPatches(Container container) {
         File rootDir = imageFs.getRootDir();
-        FileUtils.delete(new File(rootDir, "/opt/apps"));
         TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "imagefs_patches.tzst", rootDir, onExtractFileListener);
         TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "pulseaudio.tzst", new File(getFilesDir(), "pulseaudio"));
         WineUtils.applySystemTweaks(this, wineInfo);
