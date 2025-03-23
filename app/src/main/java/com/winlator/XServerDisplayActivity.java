@@ -2333,7 +2333,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
             
             
-            if (!GPUInformation.isAdreno6xx(this)) {
+            if (!GPUInformation.isAdreno6xx()) {
                 EnvVars userEnvVars = new EnvVars(container.getEnvVars());
                 String tuDebug = userEnvVars.get("TU_DEBUG");
                 if (!tuDebug.contains("sysmem"))
@@ -2513,7 +2513,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         if (!envVars.has("MESA_VK_WSI_PRESENT_MODE")) envVars.put("MESA_VK_WSI_PRESENT_MODE", "mailbox");
         envVars.put("vblank_mode", "0");
 
-        if (!GPUInformation.isAdreno6xx(this)) {
+        if (!GPUInformation.isAdreno6xx()) {
             EnvVars userEnvVars = new EnvVars(container.getEnvVars());
             String tuDebug = userEnvVars.get("TU_DEBUG");
             if (!tuDebug.contains("sysmem")) {

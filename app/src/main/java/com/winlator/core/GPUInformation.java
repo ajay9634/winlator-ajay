@@ -18,8 +18,16 @@ import javax.microedition.khronos.opengles.GL10;
 
 public abstract class GPUInformation {
 
-    public static boolean isAdreno6xx(Context context) {
+    public static boolean isAdreno6xx() {
         return getRenderer().toLowerCase(Locale.ENGLISH).matches(".*adreno[^6]+6[0-9]{2}.*");
+    }
+
+    public static boolean isAdreno7xx() {
+        return getRenderer().toLowerCase(Locale.ENGLISH).matches(".*adreno[^7]+7[0-9]{2}.*");
+    }
+
+    public static boolean isAdreno8xx() {
+        return getRenderer().toLowerCase(Locale.ENGLISH).matches(".*adreno[^8]+8[0-9]{2}.*");
     }
 
     public native static String getVersion();
