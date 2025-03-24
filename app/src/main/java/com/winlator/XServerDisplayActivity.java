@@ -2970,6 +2970,8 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         if (envVars.has("EXTRA_EXEC_ARGS")) {
             args += " " + envVars.get("EXTRA_EXEC_ARGS");
             envVars.remove("EXTRA_EXEC_ARGS"); // Remove the key after use
+        } else {
+            args += "\"wfm.exe\"";
         }
 
         // Construct the final command
