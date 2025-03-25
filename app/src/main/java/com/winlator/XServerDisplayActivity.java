@@ -429,7 +429,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             }
 
             // Initialize Win32AppWorkarounds
-//            win32AppWorkarounds = new Win32AppWorkarounds(this);
+            win32AppWorkarounds = new Win32AppWorkarounds(this);
 
             // Determine the class name for the startup workarounds
             String wmClass = shortcut != null ? shortcut.getExtra("wmClass", "") : "";
@@ -437,7 +437,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
             if (!wmClass.isEmpty()) {
                 // Apply startup workarounds based on wmClass
-//                win32AppWorkarounds.applyStartupWorkarounds(wmClass);
+                win32AppWorkarounds.applyStartupWorkarounds(wmClass);
             } else {
                 // Fallback: Use the executable name for workarounds
                 String execPath = getIntent().getStringExtra("exec_path");
@@ -447,7 +447,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                     String execName = FileUtils.getName(execPath);
                     Log.d("XServerDisplayActivity", "Startup execName: " + execName);
 
-//                    win32AppWorkarounds.applyStartupWorkarounds(execName);
+                    win32AppWorkarounds.applyStartupWorkarounds(execName);
                 } else {
                     Log.w("XServerDisplayActivity", "No wmClass or execPath provided for startup workarounds.");
                 }
