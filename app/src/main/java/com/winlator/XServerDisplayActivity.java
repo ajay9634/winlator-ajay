@@ -375,16 +375,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             navigationView.setBackgroundResource(R.color.content_dialog_background_dark);
         }
 
-        ProcessHelper.removeAllDebugCallbacks();
         boolean enableLogs = preferences.getBoolean("enable_wine_debug", false) || preferences.getBoolean("enable_box86_64_logs", false);
-        if (enableLogs) ProcessHelper.addDebugCallback(debugDialog = new DebugDialog(this));
-        boolean enableApiDump = preferences.getBoolean("enable_vulkan_api_dump", false);
-        if (enableApiDump) {
-            ProcessHelper.removeAllDebugCallbacks();
-            File logFile = LogView.getLogFile();
-            envVars.put("VK_INSTANCE_LAYERS", "VK_LAYER_LUNARG_api_dump");
-            envVars.put("VK_API_DUMP_LOG_FILENAME", logFile.getPath());
-        }
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.main_menu_logs).setVisible(enableLogs);
         if (XrActivity.isEnabled(this)) menu.findItem(R.id.main_menu_magnifier).setVisible(false);
@@ -498,6 +489,16 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
             if (shortcutPath != null && !shortcutPath.isEmpty()) {
                 shortcut = new Shortcut(container, new File(shortcutPath));
+            }
+
+            ProcessHelper.removeAllDebugCallbacks();
+            if (enableLogs) {
+                LogView.setFilename(getExecutable());
+                ProcessHelper.addDebugCallback(debugDialog = new DebugDialog(this));
+                boolean enableApiDump = preferences.getBoolean("enable_vulkan_api_dump", false);
+                if (enableApiDump) {
+                    envVars.put("VK_INSTANCE_LAYERS", "VK_LAYER_LUNARG_api_dump");
+                }
             }
 
             // Retrieve secondary executable and delay
@@ -2983,6 +2984,19 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         Log.d("Winetricks", "Wine Start Command: " + command);
 
         return command;
+    }
+
+    private String getExecutable() {
+        String filename = "";
+        if (shortcut != null) {
+            filename = FileUtils.getName(shortcut.path);
+        }
+        else if (isGenerateWineprefix()) {
+            filename = "wineboot.exe";
+        }
+        else
+            filename = "wfm.exe";
+        return filename;
     }
 
 
