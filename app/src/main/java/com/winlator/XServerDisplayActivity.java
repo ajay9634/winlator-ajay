@@ -2435,7 +2435,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 adrenotoolsManager.setDriverById(envVars, imageFs, adrenoToolsDriverId);
             }    
         }
-        
         extractZinkDlls(changed);
     }
 
@@ -2721,15 +2720,20 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         }));
     }
     
-    private void extractZinkDlls(boolean status) {
+    private void extractZinkDlls(boolean changed) {
         final String[] dlls = {"opengl32"};
         File rootDir = imageFs.getRootDir();
         File windowsDir = new File(rootDir, ImageFs.WINEPREFIX + "/drive_c/windows");
-        
-        restoreOriginalDllFiles(dlls);
-        
-        if (container.isBionic() && (graphicsDriver.contains("turnip") || graphicsDriver.contains("wrapper"))) 
+        File userRegFile = new File(rootDir, ImageFs.WINEPREFIX + "/user.reg");
+        final String dllOverridesKey = "Software\\Wine\\DllOverrides";
+
+        if (container.isBionic() && (graphicsDriver.contains("turnip") || graphicsDriver.contains("wrapper")) && changed) {
+            try (WineRegistryEditor registryEditor = new WineRegistryEditor(userRegFile)) {
+                for (String name : dlls) registryEditor.setStringValue(dllOverridesKey, name, "native, builtin");
+            }
+            restoreOriginalDllFiles(dlls);
             TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "graphics_driver/zink_dlls.tzst", windowsDir, onExtractFileListener);
+        }
     }
 
     private static final String TAG = "DXWrapperExtraction";
