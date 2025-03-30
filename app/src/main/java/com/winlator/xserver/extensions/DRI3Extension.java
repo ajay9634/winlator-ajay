@@ -154,9 +154,9 @@ public class DRI3Extension implements Extension {
     
     private void pixmapFromHardwareBuffer(XClient client, int pixmapId, short width, short height, byte depth, int fd) throws IOException, XRequestError {
         try {
-            Drawable drawable = client.xServer.drawableManager.createDrawable(pixmapId, width, height, depth);
             GPUImage gpuImage = new GPUImage(fd);
-            drawable.setData(gpuImage.getVirtualData());
+            Drawable drawable = client.xServer.drawableManager.createDrawable(pixmapId, gpuImage.getStride(), height, depth);
+            drawable.setTexture(gpuImage);
             client.xServer.pixmapManager.createPixmap(drawable);
         }
         finally {
