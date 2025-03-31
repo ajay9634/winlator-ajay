@@ -501,8 +501,7 @@ public class ContainerDetailFragment extends Fragment {
             swBionicContainer.setChecked(container.isBionic());
             swBionicContainer.setEnabled(false); // Disable toggle in edit mode
         }
-        
-        FrameLayout boxFL = view.findViewById(R.id.box86box64Frame);
+
         FrameLayout fexcoreFL = view.findViewById(R.id.fexcoreFrame);
         
         if (!swBionicContainer.isChecked()) {
@@ -522,7 +521,6 @@ public class ContainerDetailFragment extends Fragment {
             sGraphicsItemsList.remove("VirGL");
             sGraphicsDriver.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, sGraphicsItemsList));
             AppUtils.setSpinnerSelectionFromValue(sGraphicsDriver, selectedDriver);
-            boxFL.setVisibility(View.GONE);
             fexcoreFL.setVisibility(View.VISIBLE);
         }
 
@@ -531,9 +529,6 @@ public class ContainerDetailFragment extends Fragment {
                 // Disable Wine version
                 sWineVersion.setEnabled(false);
                 sWineVersion.setSelection(0);
-
-                // Disable Box64 section
-                boxFL.setVisibility(View.GONE);
                     
                 // Enable fexcore section
                 fexcoreFL.setVisibility(View.VISIBLE);
@@ -549,8 +544,6 @@ public class ContainerDetailFragment extends Fragment {
                 // Enable Wine version
                 sWineVersion.setEnabled(true);
 
-                // Enable Box64 section
-                boxFL.setVisibility(View.VISIBLE);
                     
                 // Disable fexcore section
                 fexcoreFL.setVisibility(View.GONE);     
