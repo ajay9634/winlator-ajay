@@ -2122,7 +2122,9 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     private void simulateConfirmInputControlsDialog() {
         // Simulate setting the relative mouse movement and touchscreen controls from preferences
         boolean isRelativeMouseMovement = preferences.getBoolean("relative_mouse_movement_enabled", false);
+        boolean isForceMouseControl = preferences.getBoolean("force_mouse_control_enabled", false);
         xServer.setRelativeMouseMovement(isRelativeMouseMovement);
+        xServer.setForceMouseControl(isForceMouseControl);
 
         boolean isShowTouchscreenControls = preferences.getBoolean("show_touchscreen_controls_enabled", false); // default is false (hidden)
         inputControlsView.setShowTouchscreenControls(isShowTouchscreenControls);

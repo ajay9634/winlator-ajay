@@ -491,6 +491,10 @@ public class TouchpadView extends View {
                 WinHandler winHandler = xServer.getWinHandler();
                 winHandler.mouseEvent(MouseEventFlags.MOVE, dx, dy, 0);
             }
+            else if (xServer.isForceMouseControl()) {
+                WinHandler winHandler = xServer.getWinHandler();
+                winHandler.mouseEvent(MouseEventFlags.MOVE, (int) (dx * 0.50), (int) (dy * 0.50), 0);
+            }
             else xServer.injectPointerMoveDelta(dx, dy);
         }
     }

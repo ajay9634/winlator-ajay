@@ -95,6 +95,7 @@ public class SettingsFragment extends Fragment {
     private CheckBox cbXinputToggle;
     // Disable or enable Touchscreen Input Mode
     private CheckBox cbXTouchscreenToggle;
+    private CheckBox cbForceMouseControl;
 
     private CheckBox cbGyroEnabled;
     private SeekBar sbGyroXSensitivity;
@@ -183,6 +184,9 @@ public class SettingsFragment extends Fragment {
         // Initialize the Touchscreen mode toggle
         cbXTouchscreenToggle = view.findViewById(R.id.CBXTouchscreenToggle);
         cbXTouchscreenToggle.setChecked(preferences.getBoolean("touchscreen_toggle", false));
+
+        cbForceMouseControl = view.findViewById(R.id.CBForceMouseControl);
+        cbForceMouseControl.setChecked(preferences.getBoolean("force_mouse_control_enabled", false));
 
         // Inside onCreateView in SettingsFragment.java
         CheckBox cbLegacyInputMode = view.findViewById(R.id.CBLegacyInputMode);
@@ -457,6 +461,7 @@ public class SettingsFragment extends Fragment {
             editor.putBoolean("cursor_lock", cbCursorLock.isChecked()); // Save cursor lock state
             editor.putBoolean("xinput_toggle", cbXinputToggle.isChecked()); // Save xinput toggle state
             editor.putBoolean("touchscreen_toggle", cbXTouchscreenToggle.isChecked()); // Save touchscreen toggle state
+            editor.putBoolean("force_mouse_control_enabled", cbForceMouseControl.isChecked());
             editor.putBoolean("enable_file_provider", cbEnableFileProvider.isChecked());
             editor.putBoolean("use_lorie", cbEnableLorie.isChecked());
 

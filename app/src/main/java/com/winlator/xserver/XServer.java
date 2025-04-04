@@ -41,6 +41,7 @@ public class XServer {
     private WinHandler winHandler;
     private final EnumMap<Lockable, ReentrantLock> locks = new EnumMap<>(Lockable.class);
     private boolean relativeMouseMovement = false;
+    private boolean forceMouseControl = true;
 
     private boolean isGrabbed = false;
     private XClient grabbingClient = null;
@@ -69,6 +70,13 @@ public class XServer {
     public void setRelativeMouseMovement(boolean relativeMouseMovement) {
         cursorLocker.setEnabled(!relativeMouseMovement);
         this.relativeMouseMovement = relativeMouseMovement;
+    }
+
+    public boolean isForceMouseControl() { return forceMouseControl; }
+
+    public void setForceMouseControl(boolean forceMouseControl) {
+        cursorLocker.setEnabled(!forceMouseControl);
+        this.forceMouseControl = forceMouseControl;
     }
 
     public GLRenderer getRenderer() {
