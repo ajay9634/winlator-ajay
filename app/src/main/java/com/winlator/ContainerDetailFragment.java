@@ -52,6 +52,7 @@ import com.winlator.core.Callback;
 import com.winlator.core.DefaultVersion;
 import com.winlator.core.EnvVars;
 import com.winlator.core.FileUtils;
+import com.winlator.core.GPUInformation;
 import com.winlator.core.KeyValueSet;
 import com.winlator.core.PreloaderDialog;
 import com.winlator.core.StringUtils;
@@ -801,7 +802,10 @@ public class ContainerDetailFragment extends Fragment {
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "strict_shader_math", sStrictShaderMath.getSelectedItemPosition());
 
             Spinner sVideoMemorySize = view.findViewById(R.id.SVideoMemorySize);
-            registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", StringUtils.parseNumber(sVideoMemorySize.getSelectedItem()));
+            String videoMemorySize = StringUtils.parseNumber(sVideoMemorySize.getSelectedItem());
+            if (videoMemorySize.equals("0"))
+                videoMemorySize = String.valueOf(GPUInformation.getMemorySize());
+            registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", videoMemorySize);
 
             Spinner sMouseWarpOverride = view.findViewById(R.id.SMouseWarpOverride);
             registryEditor.setStringValue("Software\\Wine\\DirectInput", "MouseWarpOverride", sMouseWarpOverride.getSelectedItem().toString().toLowerCase(Locale.ENGLISH));
@@ -865,6 +869,17 @@ public class ContainerDetailFragment extends Fragment {
 
             Spinner sVideoMemorySize = view.findViewById(R.id.SVideoMemorySize);
             String videoMemorySize = registryEditor.getStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", "2048");
+            ArrayList<String> memorySizeValues = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.video_memory_size_entries)));
+            boolean foundMemory = false;
+            for (String memorySize : memorySizeValues) {
+                memorySize = StringUtils.parseNumber(memorySize);
+                if (memorySize.contains(videoMemorySize)) {
+                    foundMemory = true;
+                    break;
+                }
+            }
+            if (!foundMemory)
+                videoMemorySize = "0";
             AppUtils.setSpinnerSelectionFromNumber(sVideoMemorySize, videoMemorySize);
 
             List<String> mouseWarpOverrideList = Arrays.asList(context.getString(R.string.disable), context.getString(R.string.enable), context.getString(R.string.force));

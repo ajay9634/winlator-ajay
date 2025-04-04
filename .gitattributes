@@ -1,0 +1,1 @@
+*.tzst !text !filter !merge !diff

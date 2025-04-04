@@ -1936,10 +1936,9 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             startTouchscreenTimeout();
         }
 
-
         if (container != null && container.isShowFPS()) {
             frameRating = new FrameRating(this, container);
-            envVars.put("ENABLE_UTIL_LAYER", "1");
+            envVars.put("UTIL_LAYER_DUMP_INFO", "1");
             frameRating.setVisibility(View.GONE);
             rootView.addView(frameRating);
         }
@@ -2262,7 +2261,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         String selectedDriverVersion = "";
         String currentTurnipVersion = container.getTurnipGraphicsDriverVersion();
         String currentWrapperVersion = container.getWrapperGraphicsDriverVersion();
-        
+
         if (graphicsDriver.contains("turnip"))
             selectedDriverVersion = currentTurnipVersion; // Fetch the selected version
         else if (graphicsDriver.contains("wrapper"))
@@ -2306,7 +2305,8 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         }
 
         File rootDir = imageFs.getRootDir(); // Target the root directory of imagefs
-
+        File userRegFile = new File(rootDir, ImageFs.WINEPREFIX + "/user.reg");
+        final String dllOverridesKey = "Software\\Wine\\DllOverrides";
 
 
         if (changed) {
@@ -2437,6 +2437,10 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             }    
         }
         extractZinkDlls(changed);
+        try (WineRegistryEditor registryEditor = new WineRegistryEditor(userRegFile)) {
+            String videoMemorySize = registryEditor.getStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", String.valueOf(GPUInformation.getMemorySize()));
+            envVars.put("UTIL_LAYER_VMEM_MAX_SIZE", videoMemorySize);
+        }
     }
 
     private void copyDirectory(File sourceDir, File destinationDir) throws IOException {

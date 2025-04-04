@@ -335,6 +335,7 @@ public class GlibcProgramLauncherComponent extends GuestProgramLauncherComponent
         envVars.put("TMPDIR", rootDir.getPath() + "/usr/tmp");
         envVars.put("DISPLAY", ":0");
         envVars.put("WINE_DISABLE_FULLSCREEN_HACK", "1");
+        envVars.put("ENABLE_UTIL_LAYER", "1");
 
         String winePath = wineProfile == null ? imageFs.getWinePath() + "/bin"
                 : ContentsManager.getSourceFile(context, wineProfile, wineProfile.wineBinPath).getAbsolutePath();
