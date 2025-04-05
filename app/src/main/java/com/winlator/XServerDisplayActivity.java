@@ -3050,14 +3050,18 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         }
     }
 
-    private void applyGeneralPatches(Container container) {
+    private void extractEmulatorsDlls() {
         File rootDir = imageFs.getRootDir();
-        TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "imagefs_patches.tzst", rootDir, onExtractFileListener);
+        File system32dir = new File(rootDir, "home/xuser/.wine/drive_c/windows/system32");
+        TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "emulators_dlls.tzst", system32dir, onExtractFileListener);
+    }
+
+    private void applyGeneralPatches(Container container) {
+        if (container.isBionic()) extractEmulatorsDlls();
         TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "pulseaudio.tzst", new File(getFilesDir(), "pulseaudio"));
         WineUtils.applySystemTweaks(this, wineInfo);
         container.putExtra("graphicsDriver", null);
         container.putExtra("desktopTheme", null);
-        //SettingsFragment.resetBox86_64Version(this);
     }
 
 //    private void assignTaskAffinity(Window window) {
