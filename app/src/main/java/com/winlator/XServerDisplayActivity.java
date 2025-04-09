@@ -742,37 +742,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         Log.d("ContainerDetailFragment", "Switched /opt/wine → /opt/wine.glibc");
     }
 
-
-    private Handler processDetectionHandler;
-    private Runnable processDetectionRunnable;
-
-    private void startProcessDetection() {
-        processDetectionHandler = new Handler(Looper.getMainLooper());
-        processDetectionRunnable = new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<String> runningProcesses = ProcessHelper.listRunningProcesses();
-                Log.d("ProcessDetection", "Running processes: " + runningProcesses);
-
-                for (String processName : runningProcesses) {
-                    Log.d("ProcessDetection", "Detected process: " + processName);
-
-                    // Check if there's a workaround for this process
-                    if (win32AppWorkarounds != null) {
-                        win32AppWorkarounds.applyStartupWorkarounds(processName);
-                    }
-                }
-
-                // Schedule the next check
-                processDetectionHandler.postDelayed(this, 5000); // Check every 5 seconds
-            }
-        };
-
-        processDetectionHandler.post(processDetectionRunnable);
-    }
-
-
-
     // Method to parse container_id from .desktop file
     private int parseContainerIdFromDesktopFile(File desktopFile) {
         int containerId = 0;
