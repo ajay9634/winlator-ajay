@@ -639,6 +639,7 @@ public class TouchpadView extends View {
 
     public void setSimTouchScreen(boolean simTouchScreen) {
         this.simTouchScreen = simTouchScreen;
+        xServer.setSimulateTouchScreen(this.simTouchScreen);
     }
 
     public boolean isSimTouchScreen() {
