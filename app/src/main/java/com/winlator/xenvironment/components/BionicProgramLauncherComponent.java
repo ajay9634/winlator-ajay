@@ -62,11 +62,9 @@ public class BionicProgramLauncherComponent extends GuestProgramLauncherComponen
     @Override
     public void start() {
         synchronized (lock) {
-            stop();
-
-            // Testing artifact
+            // Terminate any stale wineserver processes gracefully
+            ProcessHelper.terminateProcessByName("wineserver");
             checkDependencies();
-
             pid = execGuestProgram();
         }
     }
