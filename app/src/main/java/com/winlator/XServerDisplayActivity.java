@@ -1150,7 +1150,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 }
                 return true;
             case R.id.main_menu_exit:
-                exit();
+                finish();
                 break;
 
         }
@@ -1190,11 +1190,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 touchpadView.setOnCapturedPointerListener(null);
             }
         }
-    }
-    private void exit() {
-        winHandler.stop();
-        if (environment != null) environment.stopEnvironmentComponents();
-        AppUtils.restartApplication(this);
     }
 
     private void setupWineSystemFiles() {
