@@ -51,7 +51,11 @@ public class BionicProgramLauncherComponent extends GuestProgramLauncherComponen
     private final Shortcut shortcut;
     private String box64Version;
 
-
+    private void extractEmulatorsDlls() {
+        File rootDir = environment.getImageFs().getRootDir();
+        File system32dir = new File(rootDir, "home/xuser/.wine/drive_c/windows/system32");
+        TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, environment.getContext(), "emulators_dlls.tzst", system32dir);
+    }
 
     public BionicProgramLauncherComponent(ContentsManager contentsManager, ContentProfile wineProfile, Shortcut shortcut) {
         this.contentsManager = contentsManager;
@@ -64,6 +68,7 @@ public class BionicProgramLauncherComponent extends GuestProgramLauncherComponen
         synchronized (lock) {
             // Terminate any stale wineserver processes gracefully
             ProcessHelper.terminateProcessByName("wineserver");
+            extractEmulatorsDlls();
             checkDependencies();
             pid = execGuestProgram();
         }
