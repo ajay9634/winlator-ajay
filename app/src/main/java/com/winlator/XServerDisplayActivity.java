@@ -495,10 +495,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             if (enableLogs) {
                 LogView.setFilename(getExecutable());
                 ProcessHelper.addDebugCallback(debugDialog = new DebugDialog(this));
-                boolean enableApiDump = preferences.getBoolean("enable_vulkan_api_dump", false);
-                if (enableApiDump) {
-                    envVars.put("VK_INSTANCE_LAYERS", "VK_LAYER_LUNARG_api_dump");
-                }
             }
 
             // Retrieve secondary executable and delay
