@@ -2240,8 +2240,10 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
         if (container.isBionic() && graphicsDriver.equals("turnip") && !selectedDriverVersion.equals(DefaultVersion.TURNIP_BIONIC)) {
             // Ensure Toast is run on the UI thread
-            runOnUiThread(() -> Toast.makeText(this, R.string.switching_turnip, Toast.LENGTH_SHORT).show());
             selectedDriverVersion = DefaultVersion.TURNIP_BIONIC;
+        }
+        else if (!container.isBionic() && graphicsDriver.equals("turnip") && !selectedDriverVersion.equals(DefaultVersion.TURNIP_GLIBC)) {
+            selectedDriverVersion = DefaultVersion.TURNIP_GLIBC;
         }
 
         // Adjust cacheId based on the graphics driver and version
