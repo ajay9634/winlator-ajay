@@ -187,6 +187,7 @@ public class BionicProgramLauncherComponent extends GuestProgramLauncherComponen
             addBox86EnvVars(envVars, enableBox86_64Logs);
         }
         addBox64EnvVars(envVars, enableBox86_64Logs);
+        envVars.put("BOX64_MMAP32", "0");
 
         // Setting up essential environment variables for Wine
         envVars.put("HOME", imageFs.home_path);
