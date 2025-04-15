@@ -3037,7 +3037,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         if (frameRating == null) return;
         
         if (property != null) {
-            if (frameRatingWindowId == -1 && property.nameAsString().contains("_UTIL_LAYER")) {
+            if (frameRatingWindowId == -1 && (property.nameAsString().contains("_UTIL_LAYER") || property.nameAsString().contains("_MESA_DRV"))) {
                 frameRatingWindowId = window.id;
                 Log.d("XServerDisplayActivity", "Showing hud for Window " + window.getName());
                 runOnUiThread(() -> frameRating.setVisibility(View.VISIBLE));
