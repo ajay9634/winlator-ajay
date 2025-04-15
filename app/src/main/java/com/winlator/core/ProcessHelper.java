@@ -32,6 +32,13 @@ public abstract class ProcessHelper {
     
     public static void terminateProcessByName(String process) {
         try {
+            Runtime.getRuntime().exec("pkill -15 " + process);
+        }
+        catch (IOException e) {}
+    }
+
+    public static void killProcessByName(String process) {
+        try {
             Runtime.getRuntime().exec("pkill -2 " + process);
         }
         catch (IOException e) {}
