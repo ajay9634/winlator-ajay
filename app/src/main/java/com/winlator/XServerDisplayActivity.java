@@ -581,9 +581,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                     winStarted[0] = true;
                 }
                     
-                if (frameRating != null && frameRating.getVisibility() == View.VISIBLE) {
-                    frameRating.update();
-                }
+                if (frameRatingWindowId == window.id) frameRating.update();
             }
            
             @Override
@@ -3040,14 +3038,14 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             if (frameRatingWindowId == -1 && (property.nameAsString().contains("_UTIL_LAYER") || property.nameAsString().contains("_MESA_DRV"))) {
                 frameRatingWindowId = window.id;
                 Log.d("XServerDisplayActivity", "Showing hud for Window " + window.getName());
-                runOnUiThread(() -> frameRating.setVisibility(View.VISIBLE));
+                frameRating.update();
             }    
         }
-        else if (frameRatingWindowId != -1 && frameRating.getVisibility() == View.VISIBLE) {
+        else if (frameRatingWindowId != -1) {
             frameRatingWindowId = -1;
             Log.d("XServerDisplayActivity", "Hiding hud for Window " + window.getName());
-            frameRating.reset();
             runOnUiThread(() -> frameRating.setVisibility(View.GONE));
+            frameRating.reset();
         }    
     }
 
