@@ -86,6 +86,7 @@ import com.winlator.core.WineRegistryEditor;
 import com.winlator.core.WineStartMenuCreator;
 import com.winlator.core.WineThemeManager;
 import com.winlator.core.WineUtils;
+import com.winlator.fexcore.FEXCoreManager;
 import com.winlator.inputcontrols.ControlsProfile;
 import com.winlator.inputcontrols.ExternalController;
 import com.winlator.inputcontrols.InputControlsManager;
@@ -1432,6 +1433,9 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         if (isGenerateWineprefix()) {
             generateWineprefix();
         }
+
+        // Generate fexcore per app settings
+        FEXCoreManager.createAppConfigFiles(this);
 
         // Start all environment components (XServer, Audio, etc.)
         environment.startEnvironmentComponents();
