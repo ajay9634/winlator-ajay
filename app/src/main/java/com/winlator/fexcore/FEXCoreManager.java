@@ -41,14 +41,14 @@ public final class FEXCoreManager {
 
         if (tsoEnabled.equals("1")) {
             if (halfbarrierTSOEnabled.equals("1"))
-                ret = "Fast";
-            else if(vectorTSOEnabled.equals("1") && memcpySetTSOEnabled.equals("1"))
                 ret = "Slow";
+            else if(vectorTSOEnabled.equals("1") && memcpySetTSOEnabled.equals("1"))
+                ret = "Slowest";
             else
-                ret = "Fastest";
+                ret = "Fast";
         }
         else
-            ret = "Disabled";
+            ret = "Fastest";
 
         return ret;
     }
@@ -62,14 +62,8 @@ public final class FEXCoreManager {
         String halfbarrierTSOEnabled = "";
         
         switch (tsoPreset) {
-            case "Disabled":
-                tsoEnabled = "0";
-                vectorTSOEnabled = "0";
-                memcpysetTSOEnabled = "0";
-                halfbarrierTSOEnabled = "0";
-                break;
             case "Fastest":
-                tsoEnabled = "1";
+                tsoEnabled = "0";
                 vectorTSOEnabled = "0";
                 memcpysetTSOEnabled = "0";
                 halfbarrierTSOEnabled = "0";
@@ -78,9 +72,15 @@ public final class FEXCoreManager {
                 tsoEnabled = "1";
                 vectorTSOEnabled = "0";
                 memcpysetTSOEnabled = "0";
-                halfbarrierTSOEnabled = "1";
+                halfbarrierTSOEnabled = "0";
                 break;
             case "Slow":
+                tsoEnabled = "1";
+                vectorTSOEnabled = "0";
+                memcpysetTSOEnabled = "0";
+                halfbarrierTSOEnabled = "1";
+                break;
+            case "Slowest":
                 tsoEnabled = "1";
                 vectorTSOEnabled = "1";
                 memcpysetTSOEnabled = "1";
@@ -143,7 +143,7 @@ public final class FEXCoreManager {
     }
     
    private static void setFromDefaults(Spinner tsoModeSpinner, Spinner x87modeSpinner, Spinner multiBlockSpinner) {
-       selectSpinnerItemByValue(tsoModeSpinner, tsoPresets, "Fastest");
+       selectSpinnerItemByValue(tsoModeSpinner, tsoPresets, "Fast");
        selectSpinnerItemByValue(x87modeSpinner, x87modePresets, "Fast");
        selectSpinnerItemByValue(multiBlockSpinner, multiblockValues, "Disabled");
    }
