@@ -3017,6 +3017,8 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     }
 
     private void applyGeneralPatches(Container container) {
+        File rootDir = imageFs.getRootDir();
+        TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "container_pattern_common.tzst", rootDir);
         TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "pulseaudio.tzst", new File(getFilesDir(), "pulseaudio"));
         WineUtils.applySystemTweaks(this, wineInfo);
         container.putExtra("graphicsDriver", null);
