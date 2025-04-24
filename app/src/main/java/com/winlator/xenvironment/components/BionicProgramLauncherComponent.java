@@ -66,8 +66,6 @@ public class BionicProgramLauncherComponent extends GuestProgramLauncherComponen
     @Override
     public void start() {
         synchronized (lock) {
-            // Terminate any stale wineserver processes gracefully
-            ProcessHelper.terminateProcessByName("wineserver");
             extractEmulatorsDlls();
             checkDependencies();
             pid = execGuestProgram();

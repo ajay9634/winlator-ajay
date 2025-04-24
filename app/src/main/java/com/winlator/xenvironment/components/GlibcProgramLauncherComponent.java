@@ -58,8 +58,6 @@ public class GlibcProgramLauncherComponent extends GuestProgramLauncherComponent
     @Override
     public void start() {
         synchronized (lock) {
-            // Terminate any stale wineserver processes gracefully
-            ProcessHelper.terminateProcessByName("wineserver");
             // Proceed with other startup tasks
             extractBox86_64Files();
             checkCurlDependencies();

@@ -30,16 +30,18 @@ public abstract class ProcessHelper {
         Log.d("GlibcDebug", "Process resumed with pid: " + pid);
     }
     
-    public static void terminateProcessByName(String process) {
+    public static void terminateAllProcesses() {
         try {
-            Runtime.getRuntime().exec("pkill -15 " + process);
+            for (String process : listRunningWineProcesses())
+                Runtime.getRuntime().exec("pkill -15 " + process);
         }
         catch (IOException e) {}
     }
 
-    public static void killProcessByName(String process) {
+    public static void killAllProcesses() {
         try {
-            Runtime.getRuntime().exec("pkill -2 " + process);
+            for (String process : listRunningWineProcesses())
+                Runtime.getRuntime().exec("pkill -9 " + process);
         }
         catch (IOException e) {}
     }

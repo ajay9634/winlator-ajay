@@ -914,24 +914,26 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         editor.apply();
     }
 
+    private void exit() {
+        if (midiHandler != null) midiHandler.stop();
+        // Unregister sensor listener to avoid memory leaks
+        if (sensorManager != null) sensorManager.unregisterListener(gyroListener);
+        if (environment != null) environment.stopEnvironmentComponents();
+        if (preloaderDialog != null && preloaderDialog.isShowing()) preloaderDialog.close();
+        if (winHandler != null) winHandler.stop();
+        /* Gracefully terminate all running wine processes */
+        ProcessHelper.terminateAllProcesses();
+        /* Wait until all processes have gracefully terminated */
+        while (!ProcessHelper.listRunningWineProcesses().isEmpty()) continue;
+        AppUtils.restartApplication(this);
+    }
+
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        if (midiHandler != null)
-            midiHandler.stop();
-        // Unregister sensor listener to avoid memory leaks
-        sensorManager.unregisterListener(gyroListener);
-        if (environment != null) environment.stopEnvironmentComponents();
-        if (preloaderDialog != null && preloaderDialog.isShowing())
-            preloaderDialog.close();
-        winHandler.stop();
-
         savePlaytimeData(); // Save on destroy
         handler.removeCallbacks(savePlaytimeRunnable);
-
-        if (restartTriggerObserver != null) {
-            restartTriggerObserver.stopWatching();
-        }
+        if (restartTriggerObserver != null) restartTriggerObserver.stopWatching();
+        super.onDestroy();
     }
 
     @Override
@@ -1145,7 +1147,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 }
                 return true;
             case R.id.main_menu_exit:
-                finish();
+                exit();
                 break;
 
         }
@@ -1424,7 +1426,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
         // Pass final envVars to the launcher
         guestProgramLauncherComponent.setEnvVars(envVars);
-        guestProgramLauncherComponent.setTerminationCallback((status) -> finish());
+        guestProgramLauncherComponent.setTerminationCallback((status) -> exit());
 
         // Add the launcher to our environment
         environment.addComponent(guestProgramLauncherComponent);
