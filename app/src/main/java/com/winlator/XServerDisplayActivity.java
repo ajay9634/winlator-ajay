@@ -2949,16 +2949,15 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
                 args += "/dir " + StringUtils.escapeDOSPath(exeDir) + " \"" + filename + "\"" + execArgs;
             }
-        }
-
-        // Append EXTRA_EXEC_ARGS from overrideEnvVars if it exists
-        if (envVars.has("EXTRA_EXEC_ARGS")) {
-            args += " " + envVars.get("EXTRA_EXEC_ARGS");
-            envVars.remove("EXTRA_EXEC_ARGS"); // Remove the key after use
         } else {
-            args += "\"wfm.exe\"";
+            // Append EXTRA_EXEC_ARGS from overrideEnvVars if it exists
+            if (envVars.has("EXTRA_EXEC_ARGS")) {
+                args += " " + envVars.get("EXTRA_EXEC_ARGS");
+                envVars.remove("EXTRA_EXEC_ARGS"); // Remove the key after use
+            } else {
+                args += "\"wfm.exe\"";
+            }
         }
-
         // Construct the final command
         String command = "winhandler.exe " + args;
         Log.d("Winetricks", "Wine Start Command: " + command);
