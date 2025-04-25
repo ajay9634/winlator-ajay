@@ -47,6 +47,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -915,6 +916,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     }
 
     private void exit() {
+        boolean once;
         if (midiHandler != null) midiHandler.stop();
         // Unregister sensor listener to avoid memory leaks
         if (sensorManager != null) sensorManager.unregisterListener(gyroListener);
@@ -922,9 +924,15 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         if (preloaderDialog != null && preloaderDialog.isShowing()) preloaderDialog.close();
         if (winHandler != null) winHandler.stop();
         /* Gracefully terminate all running wine processes */
-        ProcessHelper.terminateAllProcesses();
-        /* Wait until all processes have gracefully terminated */
-        while (!ProcessHelper.listRunningWineProcesses().isEmpty()) continue;
+        ProcessHelper.terminateAllWineProcesses();
+        /* Wait until all processes have gracefully terminated, forcefully killing them only after a certain amount of time */
+        long start = System.currentTimeMillis();
+        while (!ProcessHelper.listRunningWineProcesses().isEmpty()) {
+            long elapsed = System.currentTimeMillis() - start;
+            if (elapsed >= 1500) {
+                break;
+            }
+        }
         AppUtils.restartApplication(this);
     }
 
