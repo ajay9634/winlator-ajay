@@ -250,15 +250,13 @@ public abstract class ProcessHelper {
         });
 
         for (int index = 0; index < allPids.length; index++){
-            String data;
+            String data = "";
             try {
                 FileInputStream fr = new FileInputStream(proc + "/" + allPids[index] + "/stat");
                 BufferedReader br = new BufferedReader(new InputStreamReader(fr));
                 data = br.readLine();
             }
-            catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            catch (IOException e) {}
             for (String filter : filterList) {
                 if (data.contains(filter))
                     filteredPids.add(allPids[index]);
