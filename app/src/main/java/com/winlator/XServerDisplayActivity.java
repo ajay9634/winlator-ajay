@@ -2823,25 +2823,20 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
             if (firstTimeBoot) {
                 for (String[] wincomponent : new KeyValueSet(wincomponents)) {
-                    String identifier = wincomponent[0];
-                    boolean useNative = wincomponent[1].equals("1");
                     JSONArray dlnames = wincomponentsJSONObject.getJSONArray(wincomponent[0]);
                     for (int i = 0; i < dlnames.length(); i++) {
                         String dlname = dlnames.getString(i);
                         dlls.add(!dlname.endsWith(".exe") ? dlname+".dll" : dlname);
                     }
-                    WineUtils.setWinComponentRegistryKeys(systemRegFile, identifier, useNative);
-                    Log.d("XServerDisplayActivity", "Setting wincomponent " + identifier + " to " + String.valueOf(useNative));
-                    WineUtils.overrideWinComponentDlls(this, container, identifier, useNative);
                 }
                 cloneOriginalDllFiles(dlls.toArray(new String[0]));
-                return;
+                dlls.clear();
             }
 
             Iterator<String[]> oldWinComponentsIter = new KeyValueSet(container.getExtra("wincomponents", Container.FALLBACK_WINCOMPONENTS)).iterator();
 
             for (String[] wincomponent : new KeyValueSet(wincomponents)) {
-                if (wincomponent[1].equals(oldWinComponentsIter.next()[1])) continue;
+                if (wincomponent[1].equals(oldWinComponentsIter.next()[1]) && !firstTimeBoot) continue;
                 String identifier = wincomponent[0];
                 boolean useNative = wincomponent[1].equals("1");
 
