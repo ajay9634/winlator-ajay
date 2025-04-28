@@ -2712,7 +2712,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             try (WineRegistryEditor registryEditor = new WineRegistryEditor(userRegFile)) {
                 for (String name : dlls) registryEditor.setStringValue(dllOverridesKey, name, "native, builtin");
             }
-            restoreOriginalDllFiles(dlls);
             TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "graphics_driver/zink_dlls.tzst", windowsDir, onExtractFileListener);
         }
     }
