@@ -2863,6 +2863,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     private void restoreOriginalDllFiles(final String... dlls) {
         File rootDir = imageFs.getRootDir();
         File windowsDir = new File(rootDir, ImageFs.WINEPREFIX+"/drive_c/windows");
+        File cacheDir = new File(rootDir, ImageFs.CACHE_PATH+"/original_dlls");
         File system32dlls = null;
         File syswow64dlls = null;
 
@@ -2876,6 +2877,19 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         }
 
         int filesCopied = 0;
+
+        for (String dll : dlls) {
+            boolean success = false;
+            File srcFile = new File(cacheDir, "system32/" + dll);
+            File dstFile = new File(windowsDir, "system32/" + dll);
+            success = FileUtils.copy(srcFile, dstFile);
+            srcFile = new File(cacheDir, "syswow64/" + dll);
+            dstFile = new File(windowsDir, "syswow64/" + dll);
+            if (success && FileUtils.copy(srcFile, dstFile))
+                filesCopied++;
+        }
+
+        if (filesCopied == dlls.length) return;
 
         for (String dll : dlls) {
             boolean success = false;
@@ -2899,8 +2913,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
              }
              return null;
          });
-
-         cloneOriginalDllFiles(dlls);
    }
 
    private void cloneOriginalDllFiles(final String... dlls) {
