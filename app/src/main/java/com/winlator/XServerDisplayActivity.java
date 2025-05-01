@@ -2723,68 +2723,55 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         File rootDir = imageFs.getRootDir();
         File windowsDir = new File(rootDir, ImageFs.WINEPREFIX + "/drive_c/windows");
 
-        switch (dxwrapper) {
-            case "wined3d":
-                Log.d(TAG, "Restoring original DLL files for wined3d.");
-                restoreOriginalDllFiles(dlls);
-                break;
+        if (dxwrapper.contains("vkd3d")) {
+            ContentProfile profile = contentsManager.getProfileByEntryName(dxwrapper);
+            Log.d(TAG, "Extract default dxvk 2.3.1 dxgi");
+            TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/dxvk-" + DefaultVersion.DXVK + ".tzst", windowsDir, onExtractFileListener);
+            if (profile != null) {
+                Log.d(TAG, "Applying user-defined VKD3D content profile: " + dxwrapper);
+                contentsManager.applyContent(profile);
+            } else {
+                Log.d(TAG, "Extracting fallback VKD3D .tzst archive: " + dxwrapper);
+                TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/" + dxwrapper + ".tzst", windowsDir, onExtractFileListener);
+            }
+            Log.d(TAG, "Finished VKD3D extraction for " + dxwrapper);
+        } else if (dxwrapper.contains("dxvk")) {
+            Log.d(TAG, "Extracting DXVK wrapper files, version: " + dxwrapper);
+            restoreOriginalDllFiles("d3d12.dll", "d3d12core.dll", "ddraw.dll");
 
-            case "cnc-ddraw":
-                Log.d(TAG, "Extracting CNC-DDRAW wrapper files.");
-                restoreOriginalDllFiles(dlls);
-                final String assetDir = "dxwrapper/cnc-ddraw-" + DefaultVersion.CNC_DDRAW;
-                File configFile = new File(rootDir, ImageFs.WINEPREFIX + "/drive_c/ProgramData/cnc-ddraw/ddraw.ini");
+            ContentProfile profile = contentsManager.getProfileByEntryName(dxwrapper);
+            if (profile != null) {
+                Log.d(TAG, "Applying user-defined DXVK content profile: " + dxwrapper);
+                contentsManager.applyContent(profile);
+            } else {
+                Log.d(TAG, "Extracting fallback DXVK .tzst archive: " + dxwrapper);
+                TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/" + dxwrapper + ".tzst", windowsDir, onExtractFileListener);
 
-                if (!configFile.isFile()) {
-                    Log.d(TAG, "Copying default ddraw.ini configuration for CNC-DDRAW.");
-                    FileUtils.copy(this, assetDir + "/ddraw.ini", configFile);
+                if (compareVersion(StringUtils.parseNumber(dxwrapper), "2.4") < 0) {
+                    Log.d(TAG, "Extracting d8vk as part of DXVK version " + dxwrapper);
+                    TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/d8vk-" + DefaultVersion.D8VK + ".tzst", windowsDir, onExtractFileListener);
                 }
+            }
+        } else if (dxwrapper.contains("wined3d")) {
+            Log.d(TAG, "Restoring original DLL files for wined3d.");
+            restoreOriginalDllFiles(dlls);
+        } else if (dxwrapper.contains("cnc-ddraw")) {
+            Log.d(TAG, "Extracting CNC-DDRAW wrapper files.");
+            restoreOriginalDllFiles(dlls);
+            final String assetDir = "dxwrapper/cnc-ddraw-" + DefaultVersion.CNC_DDRAW;
+            File configFile = new File(rootDir, ImageFs.WINEPREFIX + "/drive_c/ProgramData/cnc-ddraw/ddraw.ini");
 
-                File shadersDir = new File(rootDir, ImageFs.WINEPREFIX + "/drive_c/ProgramData/cnc-ddraw/Shaders");
-                FileUtils.delete(shadersDir);
-                FileUtils.copy(this, assetDir + "/Shaders", shadersDir);
+            if (!configFile.isFile()) {
+                Log.d(TAG, "Copying default ddraw.ini configuration for CNC-DDRAW.");
+                FileUtils.copy(this, assetDir + "/ddraw.ini", configFile);
+            }
 
-                Log.d(TAG, "Extracting CNC-DDRAW .tzst archive to Windows directory.");
-                TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, assetDir + "/ddraw.tzst", windowsDir, onExtractFileListener);
-                break;
+            File shadersDir = new File(rootDir, ImageFs.WINEPREFIX + "/drive_c/ProgramData/cnc-ddraw/Shaders");
+            FileUtils.delete(shadersDir);
+            FileUtils.copy(this, assetDir + "/Shaders", shadersDir);
 
-            case "vkd3d":
-                Log.d(TAG, "Starting extraction of preinstalled VKD3D files.");
-                TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/dxvk-" + DefaultVersion.DXVK + ".tzst", windowsDir, onExtractFileListener);
-                TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/vkd3d-" + DefaultVersion.VKD3D + ".tzst", windowsDir, onExtractFileListener);
-                Log.d(TAG, "Finished extraction of preinstalled VKD3D files.");
-                break;
-
-            default:
-                if (dxwrapper.startsWith("dxvk")) {
-                    Log.d(TAG, "Extracting DXVK wrapper files, version: " + dxwrapper);
-                    restoreOriginalDllFiles("d3d12.dll", "d3d12core.dll", "ddraw.dll");
-
-                    ContentProfile profile = contentsManager.getProfileByEntryName(dxwrapper);
-                    if (profile != null) {
-                        Log.d(TAG, "Applying user-defined DXVK content profile: " + dxwrapper);
-                        contentsManager.applyContent(profile);
-                    } else {
-                        Log.d(TAG, "Extracting fallback DXVK .tzst archive: " + dxwrapper);
-                        TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/" + dxwrapper + ".tzst", windowsDir, onExtractFileListener);
-
-                        if (compareVersion(StringUtils.parseNumber(dxwrapper), "2.4") < 0) {
-                            Log.d(TAG, "Extracting d8vk as part of DXVK version " + dxwrapper);
-                            TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/d8vk-" + DefaultVersion.D8VK + ".tzst", windowsDir, onExtractFileListener);
-                        }
-                    }
-                } else if (dxwrapper.startsWith("vkd3d")) {
-                    ContentProfile profile = contentsManager.getProfileByEntryName(dxwrapper);
-                    if (profile != null) {
-                        Log.d(TAG, "Applying user-defined VKD3D content profile: " + dxwrapper);
-                        contentsManager.applyContent(profile);
-                    } else {
-                        Log.d(TAG, "Extracting fallback VKD3D .tzst archive: " + dxwrapper);
-                        TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "dxwrapper/" + dxwrapper + ".tzst", windowsDir, onExtractFileListener);
-                    }
-                    Log.d(TAG, "Finished VKD3D extraction for " + dxwrapper);
-                }
-                break;
+            Log.d(TAG, "Extracting CNC-DDRAW .tzst archive to Windows directory.");
+            TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, assetDir + "/ddraw.tzst", windowsDir, onExtractFileListener);
         }
     }
 
