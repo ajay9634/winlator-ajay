@@ -421,32 +421,6 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 Log.d("XServerDisplayActivity", "Parsed Container ID from .desktop file: " + containerId);
             }
 
-            // Initialize Win32AppWorkarounds
-            win32AppWorkarounds = new Win32AppWorkarounds(this);
-
-            // Determine the class name for the startup workarounds
-            String wmClass = shortcut != null ? shortcut.getExtra("wmClass", "") : "";
-            Log.d("XServerDisplayActivity", "Startup wmClass: " + wmClass);
-
-            if (!wmClass.isEmpty()) {
-                // Apply startup workarounds based on wmClass
-                win32AppWorkarounds.applyStartupWorkarounds(wmClass);
-            } else {
-                // Fallback: Use the executable name for workarounds
-                String execPath = getIntent().getStringExtra("exec_path");
-                Log.d("XServerDisplayActivity", "Startup execPath: " + execPath);
-
-                if (execPath != null && !execPath.isEmpty()) {
-                    String execName = FileUtils.getName(execPath);
-                    Log.d("XServerDisplayActivity", "Startup execName: " + execName);
-
-                    win32AppWorkarounds.applyStartupWorkarounds(execName);
-                } else {
-                    Log.w("XServerDisplayActivity", "No wmClass or execPath provided for startup workarounds.");
-                }
-            }
-
-
 
             // Initialize playtime tracking
             playtimePrefs = getSharedPreferences("playtime_stats", MODE_PRIVATE);
@@ -479,6 +453,31 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             }
 
             containerManager.activateContainer(container);
+
+            // Initialize Win32AppWorkarounds
+            win32AppWorkarounds = new Win32AppWorkarounds(this);
+
+            // Determine the class name for the startup workarounds
+            String wmClass = shortcut != null ? shortcut.getExtra("wmClass", "") : "";
+            Log.d("XServerDisplayActivity", "Startup wmClass: " + wmClass);
+
+            if (!wmClass.isEmpty()) {
+                // Apply startup workarounds based on wmClass
+                win32AppWorkarounds.applyStartupWorkarounds(wmClass);
+            } else {
+                // Fallback: Use the executable name for workarounds
+                String execPath = getIntent().getStringExtra("exec_path");
+                Log.d("XServerDisplayActivity", "Startup execPath: " + execPath);
+
+                if (execPath != null && !execPath.isEmpty()) {
+                    String execName = FileUtils.getName(execPath);
+                    Log.d("XServerDisplayActivity", "Startup execName: " + execName);
+
+                    win32AppWorkarounds.applyStartupWorkarounds(execName);
+                } else {
+                    Log.w("XServerDisplayActivity", "No wmClass or execPath provided for startup workarounds.");
+                }
+            }
 
             taskAffinityMask = (short) ProcessHelper.getAffinityMask(container.getCPUList(true));
             taskAffinityMaskWoW64 = (short) ProcessHelper.getAffinityMask(container.getCPUListWoW64(true));
