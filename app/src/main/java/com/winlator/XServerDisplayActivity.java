@@ -2837,7 +2837,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 }
                 Log.d("XServerDisplayActivity", "Setting wincomponent " + identifier + " to " + String.valueOf(useNative));
                 WineUtils.overrideWinComponentDlls(this, container, identifier, useNative);
-                WineUtils.setWinComponentRegistryKeys(systemRegFile, identifier, useNative);
+                WineUtils.setWinComponentRegistryKeys(systemRegFile, identifier, useNative, this);
             }
 
             if (!dlls.isEmpty()) restoreOriginalDllFiles(dlls.toArray(new String[0]));
