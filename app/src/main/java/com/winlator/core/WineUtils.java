@@ -241,7 +241,7 @@ public abstract class WineUtils {
                     registryEditor.setStringValue("Software\\Classes\\CLSID\\{62CE7E72-4C71-4D20-B15D-452831A87D9D}\\InprocServer32", null, "C:\\windows\\system32\\msmpeg2vdec.dll");
                     registryEditor.setStringValue("Software\\Classes\\Wow6432Node\\CLSID\\{271C3902-6095-4C45-A22F-20091816EE9E}\\InprocServer32", null, "C:\\windows\\syswow64\\mf.dll");
                     registryEditor.setStringValue("Software\\Classes\\Wow6432Node\\CLSID\\{2EEB4ADF-4578-4D10-BCA7-BB955F56320A}\\InprocServer32", null, "C:\\windows\\syswow64\\wmadmod.dll");
-                    registryEditor.setStringValue("Software\\Classes\\Wow6432NOde\\CLSID\\{5210F8E4-B0BB-47C3-A8D9-7B2282CC79ED}\\InprocServer32", null, "C:\\windows\\syswow64\\wmadmod.dll");
+                    registryEditor.setStringValue("Software\\Classes\\Wow6432Node\\CLSID\\{5210F8E4-B0BB-47C3-A8D9-7B2282CC79ED}\\InprocServer32", null, "C:\\windows\\syswow64\\wmadmod.dll");
                     registryEditor.setStringValue("Software\\Classes\\Wow6432Node\\CLSID\\{82D353DF-90BD-4382-8BC2-3F6192B76E34}\\InprocServer32", null, "C:\\windows\\syswow64\\wmvdecod.dll");
                     registryEditor.setStringValue("Software\\Classes\\Wow6432Node\\CLSID\\{98230571-0087-4204-B020-3282538E57D3}\\InprocServer32", null, "C:\\windows\\syswow64\\colorcnv.dll");
                     registryEditor.setStringValue("Software\\Classes\\Wow6432Node\\CLSID\\{477EC299-1421-4BDD-971F-7CCB933F21AD}\\InprocServer32", null, "C:\\windows\\syswow64\\mf.dll");
