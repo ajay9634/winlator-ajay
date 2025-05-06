@@ -109,6 +109,7 @@
     <string name="directplay">DirectPlay</string>
     <string name="directshow">DirectShow</string>
     <string name="directx">DirectX</string>
+    <string name="xaudio">XAudio</string>
     <string name="vcrun2010">Visual C++ 2010</string>
     <string name="windowsmediafoundation">Windows Media Foundation</string>
     <string name="settings">Settings</string>
