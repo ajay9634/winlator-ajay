@@ -171,6 +171,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     private Shortcut shortcut;
     private String graphicsDriver = Container.DEFAULT_GRAPHICS_DRIVER;
     private String audioDriver = Container.DEFAULT_AUDIO_DRIVER;
+    private String emulator = Container.DEFAULT_EMULATOR;
     private String dxwrapper = Container.DEFAULT_DXWRAPPER;
     private KeyValueSet dxwrapperConfig;
     private WineInfo wineInfo;
@@ -516,6 +517,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
             graphicsDriver = container.getGraphicsDriver();
             audioDriver = container.getAudioDriver();
+            emulator = container.getEmulator();
             midiSoundFont = container.getMIDISoundFont();
             dxwrapper = container.getDXWrapper();
             String dxwrapperConfig = container.getDXWrapperConfig();
@@ -530,6 +532,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             if (shortcut != null) {
                 graphicsDriver = shortcut.getExtra("graphicsDriver", container.getGraphicsDriver());
                 audioDriver = shortcut.getExtra("audioDriver", container.getAudioDriver());
+                emulator = shortcut.getExtra("emulator", container.getEmulator());
                 dxwrapper = shortcut.getExtra("dxwrapper", container.getDXWrapper());
                 dxwrapperConfig = shortcut.getExtra("dxwrapperConfig", container.getDXWrapperConfig());
                 screenSize = shortcut.getExtra("screenSize", container.getScreenSize());
@@ -672,6 +675,12 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 //                    container.setGraphicsDriverVersion(originalContainerDriverVersion);
 //                    container.saveData();
                     changeWineAudioDriver();
+                    if (container != null && container.isBionic()) {
+                        if (emulator.toLowerCase().equals("fexcore"))
+                            envVars.put("HODLL", "libwow64fex.dll");
+                        else
+                            envVars.put("HODLL", "box64cpu.dll");
+                    }
 //                    runWinetricksAfterSetup();
                     // Run winetricks before setting up the X environment
 //                    runWinetricks("--force vcrun2010");  // Replace with the desired winetricks arguments
