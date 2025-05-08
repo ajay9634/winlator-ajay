@@ -50,7 +50,6 @@ import com.winlator.contentdialog.StorageInfoDialog;
 import com.winlator.core.AppUtils;
 import com.winlator.core.FileUtils;
 import com.winlator.core.PreloaderDialog;
-import com.winlator.X11Activity;
 import com.winlator.xenvironment.ImageFs;
 import com.winlator.TerminalActivity;
 
@@ -325,65 +324,16 @@ public class ContainersFragment extends Fragment {
             return data.size();
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-        private void launchXLorie() {
-            PackageManager pm = getActivity().getPackageManager();
-            PackageInfo info;
-            try {
-                info = pm.getPackageInfo(getActivity().getPackageName(), PackageManager.PackageInfoFlags.of(0));
-            }
-            catch (PackageManager.NameNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            ProcessBuilder builder = new ProcessBuilder("/system/bin/app_process", "/", "com.winlator.CmdEntryPoint", ":0");
-            builder.redirectErrorStream(true);
-            builder.environment().put("CLASSPATH", info.applicationInfo.sourceDir);
-            builder.environment().put("WINLATOR_X11_DEBUG", "1");
-            Log.i("SourceDir: ", info.applicationInfo.sourceDir);
-            builder.environment().put("TMPDIR", "/data/data/com.winlator/files/imagefs/usr/tmp");
-            builder.environment().put("XKB_CONFIG_ROOT", "/data/data/com.winlator/files/imagefs/usr/share/X11/xkb");
-            Thread t = new Thread(new Runnable(){
-               @Override
-               public void run() {
-                   try {
-                       Process x11Process = builder.start();
-                       Intent x11Lorie = new Intent(getActivity(), X11Activity.class);
-                       getActivity().startActivity(x11Lorie);
-                       BufferedReader br = new BufferedReader(new InputStreamReader(x11Process.getInputStream()));
-                       String line;
-                       while ((line = br.readLine()) != null) {
-                           Log.d("X11Loader", line);
-                       }
-                   }
-                   catch (IOException e) {
-                       throw new RuntimeException(e);
-                   }
-               }
-            });
-            t.start();
-        }
-
         private void runContainer(Container container) {
             final Context context = getContext();
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-            boolean isX11LorieEnabled = sp.getBoolean("use_lorie", false);
-            if(isX11LorieEnabled) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    launchXLorie();
-                }
-            }
-            else {
-                if (!XrActivity.isEnabled(getContext())) {
-                    Intent intent = new Intent(context, XServerDisplayActivity.class);
-                    intent.putExtra("container_id", container.id);
-                    requireActivity().startActivity(intent);
-                } else {
-                    XrActivity.openIntent(getActivity(), container.id, null);
-                }
+            if (!XrActivity.isEnabled(getContext())) {
+                Intent intent = new Intent(context, XServerDisplayActivity.class);
+                intent.putExtra("container_id", container.id);
+                requireActivity().startActivity(intent);
+            } else {
+                XrActivity.openIntent(getActivity(), container.id, null);
             }
         }
-
-
 
         private void showListItemMenu(View anchorView, Container container) {
             final Context context = getContext();

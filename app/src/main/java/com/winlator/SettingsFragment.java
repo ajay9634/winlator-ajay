@@ -411,9 +411,6 @@ public class SettingsFragment extends Fragment {
         cbEnableFileProvider.setOnClickListener(v -> AppUtils.showToast(context, R.string.take_effect_next_startup));
         btHelpFileProvider.setOnClickListener(v -> AppUtils.showHelpBox(context, v, R.string.help_file_provider));
 
-        final CheckBox cbEnableLorie = view.findViewById(R.id.CBEnableLorie);
-        cbEnableLorie.setChecked(preferences.getBoolean("use_lorie", false));
-
         loadInstalledWineList(view);
 
         view.findViewById(R.id.BTSelectWineFile).setOnClickListener((v) -> {
@@ -459,7 +456,6 @@ public class SettingsFragment extends Fragment {
             editor.putBoolean("touchscreen_toggle", cbXTouchscreenToggle.isChecked()); // Save touchscreen toggle state
             editor.putBoolean("force_mouse_control_enabled", cbForceMouseControl.isChecked());
             editor.putBoolean("enable_file_provider", cbEnableFileProvider.isChecked());
-            editor.putBoolean("use_lorie", cbEnableLorie.isChecked());
 
             // Save gyro settings
             editor.putBoolean("gyro_enabled", cbGyroEnabled.isChecked());
