@@ -25,7 +25,4 @@
   { "type": "Wine", "verName": "9.16-custom", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.16-custom.wcp" },
   { "type": "Wine", "verName": "9.20-custom-sandstranger", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.20.by.sandstranger.wcp" },
   { "type": "Wine", "verName": "9.21-custom-sandstranger", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.21.by.sandstranger.wcp" }
-  { "type": "VirGl", "verName": "22.1.7.w6.1", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Graphics_driver/virgl-22.1.7.w6.1.wcp" },
-  { "type": "VirGl", "verName": "23.1.9.w7", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Graphics_driver/virgl-23.1.9.w7.wcp" },
-  { "type": "VirGl", "verName": "23.1.9.w8x64", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Graphics_driver/virgl-23.1.9.w8x64.wcp" }   
 ]
