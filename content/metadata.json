@@ -18,9 +18,6 @@
   { "type": "Turnip", "verName": "23.3.0", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/turnip-23.3.0.wcp" },
   { "type": "Turnip", "verName": "24.3.0-d264c66f", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/turnip-24.3.0-d264c66f.wcp" },
   { "type": "Turnip", "verName": "25.0.0", "verCode": 5, "remoteUrl": "https://github.com/K11MCH1/WinlatorTurnipDrivers/releases/download/winlator_v25.0_r5/turnip-v25.0.0-R5.wcp" },
-  { "type": "VirGL", "verName": "22.1.7.w6.1", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Graphics_driver/virgl-22.1.7.w6.1.wcp" },
-  { "type": "VirGL", "verName": "23.1.9.w7", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Graphics_driver/virgl-23.1.9.w7.wcp" },
-  { "type": "VirGL", "verName": "23.1.9.w8x64", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Graphics_driver/virgl-23.1.9.w8x64.wcp" }   
   { "type": "Wine", "verName": "9.2-custom", "verCode": 2, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.2-custom.old.wcp" },
   { "type": "Wine", "verName": "9.2-coffincolors", "verCode": 2, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.2-w8-by-coffincolors.wcp" },  
   { "type": "Wine", "verName": "9.13-custom", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Wine_wcp/wine-9.13-custom.wcp" },
