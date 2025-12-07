@@ -8,7 +8,6 @@
   { "type": "Box64", "verName": "0.3.1.g", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Box64_wcp/box64-0.3.1.g.wcp" },
   { "type": "Box64", "verName": "0.3.2", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Box64_wcp/box64-0.3.2.wcp" },
   { "type": "Box64", "verName": "0.3.4", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/Box64_wcp/box64-0.3.4.wcp" },
-  { "type": "DXVK", "verName": "d3d8to9", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/D3d_wcp/d3d8to9.wcp" },  
   { "type": "DXVK", "verName": "0.96", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/D3d_wcp/dxvk-0.96.wcp" },
   { "type": "DXVK", "verName": "1.5.5", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/D3d_wcp/dxvk-1.5.5.wcp" },
   { "type": "DXVK", "verName": "1.7.2", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/D3d_wcp/dxvk-1.7.2.wcp" },
