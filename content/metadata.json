@@ -16,7 +16,6 @@
     { "type": "DXVK", "verName": "1.10-stripped", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/D3d_wcp/dxvk-1.10-stripped.wcp" },
   { "type": "DXVK", "verName": "1.10.3", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/D3d_wcp/dxvk-1.10.3.wcp" },
   { "type": "DXVK", "verName": "1.10.3-async", "verCode": 1, "remoteUrl": "https://github.com/ajay9634/Ajay-prefix/releases/download/D3d_wcp/dxvk-async-1.10.3.wcp" },
-  
   { "type": "Turnip", "verName": "23.3.0", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/turnip-23.3.0.wcp" },
   { "type": "Turnip", "verName": "24.3.0-d264c66f", "verCode": 1, "remoteUrl": "https://github.com/longjunyu2/winlator/releases/download/v7.1.2/turnip-24.3.0-d264c66f.wcp" },
   { "type": "Turnip", "verName": "25.0.0", "verCode": 5, "remoteUrl": "https://github.com/K11MCH1/WinlatorTurnipDrivers/releases/download/winlator_v25.0_r5/turnip-v25.0.0-R5.wcp" },
