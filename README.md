@@ -11,6 +11,12 @@ Winlator is an Android application that lets you to run Windows (x86_64) applica
 1. Download and install the APK (Winlator_10.1.apk) from [GitHub Releases](https://github.com/brunodev85/winlator/releases)
 2. Launch the app and wait for the installation process to finish
 
+# winlator mod for Personal Use
+
+Not on GitHub 
+
+Link - [Click here](https://www.dropbox.com/scl/fo/f19nv9dpy1s8xjjx17s6v/ALG1tiqbUhi0bJaP0sgv48I?rlkey=2ff6iakjmz38ibnvw1r4brjob&st=yb93lnk5&dl=0]
+
 ----
 
 [![Play on Youtube](https://img.youtube.com/vi/ETYDgKz4jBQ/3.jpg)](https://www.youtube.com/watch?v=ETYDgKz4jBQ)
@@ -44,4 +50,5 @@ This project has been in constant development since version 1.0, the current app
 - dgVoodoo ([dege.freeweb.hu/dgVoodoo2](https://dege.freeweb.hu/dgVoodoo2))
 
 Special thanks to all the developers involved in these projects.<br>
+
 Thank you to all the people who believe in this project.
