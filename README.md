@@ -15,7 +15,7 @@ Winlator is an Android application that lets you to run Windows (x86_64) applica
 
 Not on GitHub 
 
-Link - [Click here](https://www.dropbox.com/scl/fo/f19nv9dpy1s8xjjx17s6v/ALG1tiqbUhi0bJaP0sgv48I?rlkey=2ff6iakjmz38ibnvw1r4brjob&st=yb93lnk5&dl=0]
+Link - [Click here](https://www.dropbox.com/scl/fo/f19nv9dpy1s8xjjx17s6v/ALG1tiqbUhi0bJaP0sgv48I?rlkey=2ff6iakjmz38ibnvw1r4brjob&st=yb93lnk5&dl=0)
 
 ----
 
@@ -52,3 +52,4 @@ This project has been in constant development since version 1.0, the current app
 Special thanks to all the developers involved in these projects.<br>
 
 Thank you to all the people who believe in this project.
+
