@@ -1,2 +1,5 @@
 turnip-23.3.0.tzst
 turnip-24.2.0.tzst
+turnip-24.3.0.09.tzst
+turnip-25.0.0.08.tzst
+turnip-25.1.0.02.tzst
