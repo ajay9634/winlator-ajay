@@ -7,6 +7,8 @@ set "TARGET_DIR=Z:\etc"
 set "TARGET_FILE=%TARGET_DIR%\config.box64rc"
 set "TEMP_FILE=%TEMP%\ajay_box64rc_temp"
 
+if exist "%TEMP_FILE%" del "%TEMP_FILE%"
+
 title Winlator Ajay box64rc Downloader
 
 echo ==========================================
