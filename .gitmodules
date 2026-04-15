@@ -4,3 +4,6 @@
 [submodule "vortek"]
 	path = vortek
 	url = https://github.com/brunodev85/vortek
+[submodule "gladio"]
+	path = gladio
+	url = https://github.com/brunodev85/gladio
