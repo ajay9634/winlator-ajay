@@ -29,11 +29,8 @@ Winlator is an Android application that lets you to run Windows (x86_64) applica
 - To display low resolution games correctly, try to enabling the `Force Fullscreen` option in the shortcut settings.
 - To improve stability in games that uses Unity Engine, try changing the Box64 preset to `Stability` or in the shortcut settings add the exec argument `-force-gfx-direct`.
 
-# Information
-
-This project has been in constant development since version 1.0, the current app source code is up to version 7.1, I do not update this repository frequently precisely to avoid unofficial releases before the official releases of Winlator.
-
 # Credits and Third-party apps
+
 - GLIBC Patches by [Termux Pacman](https://github.com/termux-pacman/glibc-packages)
 - Wine ([winehq.org](https://www.winehq.org/))
 - Box86/Box64 by [ptitseb](https://github.com/ptitSeb)
