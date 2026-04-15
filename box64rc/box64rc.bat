@@ -52,7 +52,7 @@ copy /y "%TEMP_FILE%" "%TARGET_FILE%" >nul
 
 if %ERRORLEVEL% EQU 0 (
     color 0A
-    echo Done: %TARGET_FILE% has been updated.
+    echo Done: %TARGET_FILE% has been updated. Now Restart the Container.
 ) else (
     color 0C
     echo Failed to copy. Check if Z: drive is mounted.
