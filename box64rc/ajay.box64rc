@@ -1,3 +1,6 @@
+[*install*]
+BOX64_DYNAREC_SAFEFLAGS=2
+
 [*Setup*]
 BOX64_DYNAREC_SAFEFLAGS=2
 
