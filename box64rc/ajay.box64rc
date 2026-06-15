@@ -48,18 +48,19 @@ BOX64_DYNAREC_SAFEFLAGS=2
 BOX64_DYNAREC_BIGBLOCK=1
 
 [steam.exe]
-BOX64_ENV=WINEARGS=-noshaders -nooverlay -nocrashmonitor -no-shared-textures -cef-disable-gpu -cef-disable-gpu-compositing -cef-disable-gpu-sandbox -cef-disable-d3d11 -cef-disable-sandbox -no-cef-sandbox -cef-disable-seccomp-sandbox
-BOX64_ENV1=WINEDLLOVERRIDES=gameoverlayrenderer,gameoverlayrenderer64,gameoverlayui.exe,gameoverlayui64.exe,x86launcher.exe,x64launcher.exe,dxsetup.exe=d
+BOX64_ENV=WINEARGS=-noshaders -nooverlay -no-browser -nocrashmonitor -no-shared-textures -cef-disable-gpu -cef-disable-gpu-compositing -cef-disable-gpu-sandbox -cef-disable-d3d11 -cef-disable-sandbox -no-cef-sandbox -cef-disable-seccomp-sandbox
+BOX64_ENV1=WINEDLLOVERRIDES=gameoverlayui.exe,gameoverlayui64.exe,x86launcher.exe,x64launcher.exe,dxsetup.exe=d
 
 [steamwebhelper.exe]
 BOX64_DYNAREC_STRONGMEM=1
-BOX64_ENV=WINEDLLOVERRIDES=dxgi=b
+BOX64_ENV=WINEENV=WINE_D3D_CONFIG=renderer=gdi
+BOX64_ENV1=WINEDLLOVERRIDES=d3d8,d3d9,d3d10,d3d10_1,d3d10core,d3d11,ddraw,dxgi=b
 
 [farcry3.exe]
-BOX64_ENV=WINE_DO_NOT_OPEN_SC_MANAGER=1
+BOX64_ENV=WINEENV=WINE_DO_NOT_OPEN_SC_MANAGER=1
 
 [farcry3_d3d11.exe]
-BOX64_ENV=WINE_DO_NOT_OPEN_SC_MANAGER=1
+BOX64_ENV=WINEENV=WINE_DO_NOT_OPEN_SC_MANAGER=1
 
 [FarCry4.exe]
 BOX64_ENV=WINVERSION=winxp
@@ -107,10 +108,19 @@ BOX64_ENV=WINEARGS=-dx11
 BOX64_ENV=WINEDLLOVERRIDES=ddraw,d3d8=b
 
 [MotoRacer.exe]
-BOX64_ENV1=WINEDLLOVERRIDES=winmm=n,b
+BOX64_ENV=WINEDLLOVERRIDES=winmm=n,b
 
 [Chrono Trigger.exe]
-BOX64_ENV1=WINEDLLOVERRIDES=winegstreamer=d
+BOX64_ENV=WINEDLLOVERRIDES=winegstreamer=d
+
+[witcher3.exe]
+BOX64_DYNAREC_STRONGMEM=1
+
+[Dishonored.exe]
+BOX64_DYNAREC_STRONGMEM=1
+
+[Dishonored2.exe]
+BOX64_DYNAREC_STRONGMEM=1
 
 #.NET Framework installers
 [*dotnetfx35*]
